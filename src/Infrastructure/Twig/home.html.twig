@@ -1,0 +1,82 @@
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
+{% endblock %}
+{% block javascripts %}
+    {% block importmap %}{{ importmap('app') }}{% endblock %}
+    <script src="{{ asset('js/app.js') }}" defer></script>
+{% endblock %}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raccourcisseur d'URL | Simple & Rapide</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <div class="header">
+            <div class="logo">
+                <i class="fas fa-link"></i>
+            </div>
+            <h1 class="title">Raccourcisseur d'URL</h1>
+            <p class="subtitle">Transformez vos liens longs en URL courtes et faciles à partager en un clic</p>
+        </div>
+
+        <div class="content">
+            <div class="form-group">
+                {{ form_start(form, {'attr': {'id': 'url-form'}}) }}
+
+                <div class="input-wrapper">
+                    {{ form_widget(form.url, {
+                        'attr': {
+                            'class': 'url-input',
+                            'placeholder': 'Entrez votre URL ici...',
+                            'id': 'url-input'
+                        }
+                    }) }}
+
+                    {{ form_widget(form.submit, {
+                        'attr': {
+                            'class': 'submit-btn'
+                        }
+                    }) }}
+                </div>
+
+                {{ form_end(form) }}
+            </div>
+
+            {% if shortUrl is defined %}
+                <div class="result-container show" id="resultContainer">
+                    <div class="success-message">
+                        <i class="fas fa-check-circle"></i>
+                        <p>Votre URL a été raccourcie avec succès !</p>
+                    </div>
+
+                    <div class="shortened-url">
+                        <a href="{{ shortUrl }}" class="url-link" id="shortenedLink" target="_blank">
+                            {{ shortUrl }}
+                        </a>
+                        <button class="copy-btn" id="copyBtn">
+                            <i class="far fa-copy"></i> Copier
+                        </button>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>© 2026 Raccourcisseur d'URL • Service gratuit et sécurisé</p>
+        <p><i class="fas fa-heart" style="color: #ef4444;"></i> Développé avec passion</p>
+    </div>
+</div>
+
+<script>
+
+</script>
+</body>
+</html>
